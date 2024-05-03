@@ -1,0 +1,59 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LuffyProtocol
+    network: arbitrum-sepolia
+    source:
+      address: "0x08b36E6534a1D7D96d4d6b71eF524967d658e7FA"
+      abi: LuffyProtocol
+      startBlock: 40028072
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ClaimPointsDisabled
+        - GamePlayerIdRemappingSet
+        - OwnershipTransferRequested
+        - OwnershipTransferred
+        - PlayersMetadataUpdated
+        - PointsClaimed
+        - RequestFulfilled
+        - RequestSent
+        - ResultsFetchFailed
+        - ResultsFetchInitiated
+        - ResultsPublished
+        - SquadRegistered
+      abis:
+        - name: LuffyProtocol
+          file: ./abis/LuffyProtocol.json
+      eventHandlers:
+        - event: ClaimPointsDisabled(uint256)
+          handler: handleClaimPointsDisabled
+        - event: GamePlayerIdRemappingSet(uint256,string)
+          handler: handleGamePlayerIdRemappingSet
+        - event: OwnershipTransferRequested(indexed address,indexed address)
+          handler: handleOwnershipTransferRequested
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PlayersMetadataUpdated(uint256,string[])
+          handler: handlePlayersMetadataUpdated
+        - event: PointsClaimed(uint256,address,uint256)
+          handler: handlePointsClaimed
+        - event: RequestFulfilled(indexed bytes32)
+          handler: handleRequestFulfilled
+        - event: RequestSent(indexed bytes32)
+          handler: handleRequestSent
+        - event: ResultsFetchFailed(uint256,bytes32,bytes)
+          handler: handleResultsFetchFailed
+        - event: ResultsFetchInitiated(uint256,bytes32)
+          handler: handleResultsFetchInitiated
+        - event: ResultsPublished(uint256,bytes32,string)
+          handler: handleResultsPublished
+        - event: SquadRegistered(uint256,bytes32,address)
+          handler: handleSquadRegistered
+      file: ./src/luffy-protocol.ts

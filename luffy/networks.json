@@ -1,0 +1,8 @@
+{
+  "arbitrum-sepolia": {
+    "LuffyProtocol": {
+      "address": "0x08b36E6534a1D7D96d4d6b71eF524967d658e7FA",
+      "startBlock": 40028072
+    }
+  }
+}
