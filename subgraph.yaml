@@ -8,9 +8,9 @@ dataSources:
     name: LuffyProtocol
     network: arbitrum-sepolia
     source:
-      address: "0x08b36E6534a1D7D96d4d6b71eF524967d658e7FA"
+      address: "0x1510e68F0874ea6A3a7841a29F7Ccc6dE82915D6"
       abi: LuffyProtocol
-      startBlock: 40028072
+      startBlock: 40035254
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7

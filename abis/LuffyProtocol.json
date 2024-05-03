@@ -6,31 +6,67 @@
         "name": "_functionsRouter",
         "type": "address"
       },
-      { "internalType": "string", "name": "_sourceCode", "type": "string" },
-      { "internalType": "uint64", "name": "_subscriptionId", "type": "uint64" },
-      { "internalType": "bytes32", "name": "_donId", "type": "bytes32" }
+      {
+        "internalType": "string",
+        "name": "_sourceCode",
+        "type": "string"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_subscriptionId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_donId",
+        "type": "bytes32"
+      }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
-  { "inputs": [], "name": "EmptySource", "type": "error" },
-  { "inputs": [], "name": "NoInlineSecrets", "type": "error" },
-  { "inputs": [], "name": "OnlyRouterCanFulfill", "type": "error" },
+  {
+    "inputs": [],
+    "name": "EmptySource",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NoInlineSecrets",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "OnlyRouterCanFulfill",
+    "type": "error"
+  },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "gameId", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "gameId",
+        "type": "uint256"
+      }
     ],
     "name": "ResultsNotPublished",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "gameId", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "gameId",
+        "type": "uint256"
+      }
     ],
     "name": "SelectSquadDisabled",
     "type": "error"
   },
-  { "inputs": [], "name": "ZeroKnowledgeVerificationFailed", "type": "error" },
+  {
+    "inputs": [],
+    "name": "ZeroKnowledgeVerificationFailed",
+    "type": "error"
+  },
   {
     "anonymous": false,
     "inputs": [
@@ -274,9 +310,21 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "uint256", "name": "totalPoints", "type": "uint256" },
-      { "internalType": "bytes", "name": "_proof", "type": "bytes" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "totalPoints",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "_proof",
+        "type": "bytes"
+      }
     ],
     "name": "claimPoints",
     "outputs": [],
@@ -286,49 +334,113 @@
   {
     "inputs": [],
     "name": "donId",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "functionsRouter",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "", "type": "uint256" },
-      { "internalType": "address", "name": "", "type": "address" }
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
     "name": "gamePoints",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
-    "name": "gameResults",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "", "type": "uint256" },
-      { "internalType": "address", "name": "", "type": "address" }
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "name": "gameResults",
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
     "name": "gameToSquadHash",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "requestId", "type": "bytes32" },
-      { "internalType": "bytes", "name": "response", "type": "bytes" },
-      { "internalType": "bytes", "name": "err", "type": "bytes" }
+      {
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes",
+        "name": "response",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "err",
+        "type": "bytes"
+      }
     ],
     "name": "handleOracleFulfillment",
     "outputs": [],
@@ -336,44 +448,104 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "isSelectSquadEnabled",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "isZkVerificationEnabled",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "playerIdRemappings",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "playersMetadata",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "pointsMerkleRoot",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -392,8 +564,16 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "bytes32", "name": "_squadHash", "type": "bytes32" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_squadHash",
+        "type": "bytes32"
+      }
     ],
     "name": "registerSquad",
     "outputs": [],
@@ -401,51 +581,106 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "name": "requestToGameId",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "s_callbackGasLimit",
-    "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }],
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "s_lastError",
-    "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "s_lastRequestId",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "s_lastResponse",
-    "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "s_subscriptionId",
-    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "outputs": [
+      {
+        "internalType": "uint64",
+        "name": "",
+        "type": "uint64"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "string", "name": "_gameResults", "type": "string" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_gameResults",
+        "type": "string"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_pointsMerkleRoot",
+        "type": "bytes32"
+      }
     ],
     "name": "setGameResults",
     "outputs": [],
@@ -454,8 +689,16 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "string", "name": "_remapping", "type": "string" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_remapping",
+        "type": "string"
+      }
     ],
     "name": "setPlayerIdRemmapings",
     "outputs": [],
@@ -464,21 +707,11 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameweek", "type": "uint256" },
       {
-        "internalType": "bytes32",
-        "name": "_pointsMerkleRoot",
-        "type": "bytes32"
-      }
-    ],
-    "name": "setPointsMerkleRoot",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
       {
         "internalType": "bool",
         "name": "_isSelectSquadEnabled",
@@ -506,12 +739,24 @@
   {
     "inputs": [],
     "name": "sourceCode",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "to", "type": "address" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -519,7 +764,11 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
       {
         "internalType": "uint8",
         "name": "donHostedSecretsSlotID",
@@ -538,7 +787,11 @@
   },
   {
     "inputs": [
-      { "internalType": "string", "name": "_sourceCode", "type": "string" }
+      {
+        "internalType": "string",
+        "name": "_sourceCode",
+        "type": "string"
+      }
     ],
     "name": "updateSourceCode",
     "outputs": [],
@@ -548,7 +801,13 @@
   {
     "inputs": [],
     "name": "upkeepContract",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
