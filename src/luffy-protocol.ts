@@ -42,8 +42,6 @@ export function handleSquadRegistered(event: SquadRegisteredEvent): void {
     user.totalPointsWon = BigInt.fromI32(0);
     user.totalGamesPlayed = BigInt.fromI32(0);
   }
-  user.totalGamesPlayed = user.totalGamesPlayed.plus(BigInt.fromI32(1));
-  user.save();
 
   let prediction = Prediction.load(
     event.params.gameId.toHexString() +
@@ -56,12 +54,14 @@ export function handleSquadRegistered(event: SquadRegisteredEvent): void {
         "-" +
         event.params.registrant.toHexString()
     );
+    user.totalGamesPlayed = user.totalGamesPlayed.plus(BigInt.fromI32(1));
     prediction.game = event.params.gameId.toHexString();
     prediction.user = event.params.registrant.toHexString();
-    prediction.squadHash = event.params.squadHash;
-    prediction.transactionHash = event.transaction.hash;
     prediction.save();
   }
+  prediction.squadHash = event.params.squadHash;
+  prediction.transactionHash = event.transaction.hash;
+  user.save();
 }
 
 export function handleResultsPublished(event: ResultsPublishedEvent): void {
