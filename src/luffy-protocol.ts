@@ -36,7 +36,7 @@ export function handleGamePlayerIdRemappingSet(
 export function handleSquadRegistered(event: SquadRegisteredEvent): void {
   let user = User.load(event.params.registrant.toHexString());
   if (user == null) {
-    user = new User(event.params.registrant.toHexString());
+    user = new User(event.params.registrant.toHexString().toLowerCase());
     user.address = event.params.registrant;
     user.totalGamesClaimed = BigInt.fromI32(0);
     user.totalPointsWon = BigInt.fromI32(0);
@@ -57,11 +57,11 @@ export function handleSquadRegistered(event: SquadRegisteredEvent): void {
     user.totalGamesPlayed = user.totalGamesPlayed.plus(BigInt.fromI32(1));
     prediction.game = event.params.gameId.toHexString();
     prediction.user = event.params.registrant.toHexString();
-    prediction.save();
   }
   prediction.squadHash = event.params.squadHash;
   prediction.transactionHash = event.transaction.hash;
   user.save();
+  prediction.save();
 }
 
 export function handleResultsPublished(event: ResultsPublishedEvent): void {
