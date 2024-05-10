@@ -76,11 +76,7 @@ export function handleResultsPublished(event: ResultsPublishedEvent): void {
 
 export function handlePointsClaimed(event: PointsClaimedEvent): void {
   let user = User.load(event.params.claimer.toHexString());
-  if (user != null) {
-    user.totalGamesClaimed = user.totalGamesClaimed.plus(BigInt.fromI32(1));
-    user.totalPointsWon = user.totalPointsWon.plus(event.params.totalPoints);
-    user.save();
-  }
+
   let claim = Claim.load(
     event.params.gameId.toHexString() + "-" + event.params.claimer.toHexString()
   );
@@ -95,6 +91,11 @@ export function handlePointsClaimed(event: PointsClaimedEvent): void {
     claim.prediction = claim.id;
     claim.points = event.params.totalPoints;
     claim.transactionHash = event.transaction.hash;
+    if (user != null) {
+      user.totalGamesClaimed = user.totalGamesClaimed.plus(BigInt.fromI32(1));
+      user.totalPointsWon = user.totalPointsWon.plus(event.params.totalPoints);
+      user.save();
+    }
     claim.save();
   }
   let prediction = Prediction.load(
