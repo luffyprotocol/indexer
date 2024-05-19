@@ -1,0 +1,74 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LuffyProtocol
+    network: fuji
+    source:
+      address: "0x08b36E6534a1D7D96d4d6b71eF524967d658e7FA"
+      abi: LuffyProtocol
+      startBlock: 33150658
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BetAmountSet
+        - BetPlaced
+        - CrosschainAddressesSet
+        - CrosschainReceived
+        - GamePlayerIdRemappingSet
+        - NewTokensWhitelisted
+        - OracleRequestSent
+        - OracleResponseFailed
+        - OracleResponseSuccess
+        - OracleResultsPublished
+        - OwnershipTransferRequested
+        - OwnershipTransferred
+        - PointsClaimed
+        - RequestFulfilled
+        - RequestSent
+        - RewardsClaimed
+        - RewardsWithdrawn
+      abis:
+        - name: LuffyProtocol
+          file: ./abis/LuffyProtocol.json
+      eventHandlers:
+        - event: BetAmountSet(uint256)
+          handler: handleBetAmountSet
+        - event: BetPlaced(uint256,bytes32,address,uint256)
+          handler: handleBetPlaced
+        - event: CrosschainAddressesSet(uint64[],address[])
+          handler: handleCrosschainAddressesSet
+        - event: CrosschainReceived(bytes32)
+          handler: handleCrosschainReceived
+        - event: GamePlayerIdRemappingSet(uint256,string)
+          handler: handleGamePlayerIdRemappingSet
+        - event: NewTokensWhitelisted(address[])
+          handler: handleNewTokensWhitelisted
+        - event: OracleRequestSent(bytes32,uint256)
+          handler: handleOracleRequestSent
+        - event: OracleResponseFailed(bytes32,bytes)
+          handler: handleOracleResponseFailed
+        - event: OracleResponseSuccess(bytes32,bytes)
+          handler: handleOracleResponseSuccess
+        - event: OracleResultsPublished(bytes32,uint256,bytes32,string)
+          handler: handleOracleResultsPublished
+        - event: OwnershipTransferRequested(indexed address,indexed address)
+          handler: handleOwnershipTransferRequested
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: PointsClaimed(uint256,address,uint256)
+          handler: handlePointsClaimed
+        - event: RequestFulfilled(indexed bytes32)
+          handler: handleRequestFulfilled
+        - event: RequestSent(indexed bytes32)
+          handler: handleRequestSent
+        - event: RewardsClaimed(uint256,address,uint256)
+          handler: handleRewardsClaimed
+        - event: RewardsWithdrawn(address,uint256)
+          handler: handleRewardsWithdrawn
+      file: ./src/luffy-protocol.ts

@@ -1,0 +1,153 @@
+type BetAmountSet @entity(immutable: true) {
+  id: Bytes!
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BetPlaced @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  squadHash: Bytes! # bytes32
+  caller: Bytes! # address
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CrosschainAddressesSet @entity(immutable: true) {
+  id: Bytes!
+  destinationSelectors: [BigInt!]! # uint64[]
+  destinationAddresses: [Bytes!]! # address[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CrosschainReceived @entity(immutable: true) {
+  id: Bytes!
+  messageId: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type GamePlayerIdRemappingSet @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  remapping: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type NewTokensWhitelisted @entity(immutable: true) {
+  id: Bytes!
+  betTokens: [Bytes!]! # address[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OracleRequestSent @entity(immutable: true) {
+  id: Bytes!
+  requestId: Bytes! # bytes32
+  gameId: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OracleResponseFailed @entity(immutable: true) {
+  id: Bytes!
+  requestId: Bytes! # bytes32
+  err: Bytes! # bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OracleResponseSuccess @entity(immutable: true) {
+  id: Bytes!
+  requestId: Bytes! # bytes32
+  response: Bytes! # bytes
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OracleResultsPublished @entity(immutable: true) {
+  id: Bytes!
+  requestId: Bytes! # bytes32
+  gameId: BigInt! # uint256
+  pointsMerkleRoot: Bytes! # bytes32
+  pointsIpfsHash: String! # string
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferRequested @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type PointsClaimed @entity(immutable: true) {
+  id: Bytes!
+  gameid: BigInt! # uint256
+  claimer: Bytes! # address
+  totalPoints: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RequestFulfilled @entity(immutable: true) {
+  id: Bytes!
+  LuffyProtocol_id: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RequestSent @entity(immutable: true) {
+  id: Bytes!
+  LuffyProtocol_id: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RewardsClaimed @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  claimer: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RewardsWithdrawn @entity(immutable: true) {
+  id: Bytes!
+  claimer: Bytes! # address
+  value: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
