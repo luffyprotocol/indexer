@@ -28,6 +28,9 @@ type user @entity {
 
   "total amount of USDC spent"
   totalSpent: BigInt!
+
+  "total Claimmable USDC"
+  totalClaimmables: BigInt!
 }
 
 type game @entity {
