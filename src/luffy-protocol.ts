@@ -1,3 +1,4 @@
+import { BigInt } from "@graphprotocol/graph-ts";
 import {
   BetAmountSet as BetAmountSetEvent,
   BetPlaced as BetPlacedEvent,
@@ -24,19 +25,128 @@ import {
   claim as Claim,
   reward as Reward,
 } from "../generated/schema";
-export function handleBetPlaced(event: BetPlacedEvent): void {}
+
+export function handleGamePlayerIdRemappingSet(
+  event: GamePlayerIdRemappingSetEvent
+): void {
+  let game = Game.load(event.params.gameId.toHexString());
+  if (game == null) {
+    game = new Game(event.params.gameId.toHexString());
+    game.playerIdRemapping = event.params.remapping;
+    game.predictionsStartTime = event.block.timestamp;
+    game.transactionHash = event.transaction.hash;
+    game.save();
+  }
+}
+
+export function handleBetPlaced(event: BetPlacedEvent): void {
+  let user = User.load(event.params.caller.toHexString());
+  if (user == null) {
+    user = new User(event.params.caller.toHexString().toLowerCase());
+    user.address = event.params.caller;
+    user.totalGamesClaimed = BigInt.fromI32(0);
+    user.totalPointsWon = BigInt.fromI32(0);
+    user.totalSpent = BigInt.fromI32(0);
+    user.totalGamesPlayed = BigInt.fromI32(0);
+    user.totalClaimmables = BigInt.fromI32(0);
+    user.totalEarnings = BigInt.fromI32(0);
+  }
+
+  let prediction = Prediction.load(
+    event.params.gameId.toHexString() + "-" + event.params.caller.toHexString()
+  );
+  if (prediction == null) {
+    prediction = new Prediction(
+      event.params.gameId.toHexString() +
+        "-" +
+        event.params.caller.toHexString()
+    );
+    user.totalGamesPlayed = user.totalGamesPlayed.plus(BigInt.fromI32(1));
+    user.totalSpent = user.totalSpent.plus(event.params.amount);
+    prediction.game = event.params.gameId.toHexString();
+    prediction.user = event.params.caller.toHexString();
+  }
+  prediction.squadHash = event.params.squadHash;
+  prediction.transactionHash = event.transaction.hash;
+  prediction.amount = event.params.amount;
+  user.save();
+  prediction.save();
+}
 
 export function handleOracleResultsPublished(
   event: OracleResultsPublishedEvent
-): void {}
+): void {
+  let game = Game.load(event.params.gameId.toHexString());
+  if (game != null) {
+    game.resultsPublishedTime = event.block.timestamp;
+    game.pointsMerkleRoot = event.params.pointsMerkleRoot;
+    game.gameResults = event.params.pointsIpfsHash;
+    game.save();
+  }
+}
 
-export function handlePointsClaimed(event: PointsClaimedEvent): void {}
+export function handlePointsClaimed(event: PointsClaimedEvent): void {
+  let user = User.load(event.params.claimer.toHexString());
+
+  let claim = Claim.load(
+    event.params.gameid.toHexString() + "-" + event.params.claimer.toHexString()
+  );
+  if (claim == null) {
+    claim = new Claim(
+      event.params.gameid.toHexString() +
+        "-" +
+        event.params.claimer.toHexString()
+    );
+    claim.game = event.params.gameid.toHexString();
+    claim.user = event.params.claimer.toHexString();
+    claim.prediction = claim.id;
+    claim.points = event.params.totalPoints;
+    claim.transactionHash = event.transaction.hash;
+    if (user != null) {
+      user.totalGamesClaimed = user.totalGamesClaimed.plus(BigInt.fromI32(1));
+      user.totalPointsWon = user.totalPointsWon.plus(event.params.totalPoints);
+      user.save();
+    }
+    claim.save();
+  }
+}
+
+export function handleRewardsClaimed(event: RewardsClaimedEvent): void {
+  let user = User.load(event.params.claimer.toHexString());
+  let reward = Reward.load(
+    event.params.gameId.toHexString() + "-" + event.params.claimer.toHexString()
+  );
+  if (reward == null) {
+    reward = new Reward(
+      event.params.gameId.toHexString() +
+        "-" +
+        event.params.claimer.toHexString()
+    );
+    reward.game = event.params.gameId.toHexString();
+    reward.user = event.params.claimer.toHexString();
+    reward.claim = reward.id;
+    reward.prediction = reward.id;
+    reward.amount = event.params.value;
+    reward.position = BigInt.fromI32(69);
+    reward.transactionHash = event.transaction.hash;
+    if (user != null) {
+      user.totalClaimmables = user.totalClaimmables.plus(event.params.value);
+      user.totalEarnings = user.totalEarnings.plus(event.params.value);
+      user.save();
+    }
+    reward.save();
+  }
+}
+
+export function handleRewardsWithdrawn(event: RewardsWithdrawnEvent): void {
+  let user = User.load(event.params.claimer.toHexString());
+  if (user != null) {
+    user.totalClaimmables = BigInt.fromI32(0);
+    user.save();
+  }
+}
 
 export function handleBetAmountSet(event: BetAmountSetEvent): void {}
-
-export function handleRewardsClaimed(event: RewardsClaimedEvent): void {}
-
-export function handleRewardsWithdrawn(event: RewardsWithdrawnEvent): void {}
 
 export function handleCrosschainAddressesSet(
   event: CrosschainAddressesSetEvent
@@ -44,10 +154,6 @@ export function handleCrosschainAddressesSet(
 
 export function handleCrosschainReceived(
   event: CrosschainReceivedEvent
-): void {}
-
-export function handleGamePlayerIdRemappingSet(
-  event: GamePlayerIdRemappingSetEvent
 ): void {}
 
 export function handleNewTokensWhitelisted(
