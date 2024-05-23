@@ -1438,6 +1438,24 @@
   {
     "inputs": [
       {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_remapping",
+        "type": "string"
+      }
+    ],
+    "name": "zsetPlayerIdRemmapings",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
         "internalType": "address",
         "name": "_claimer",
         "type": "address"

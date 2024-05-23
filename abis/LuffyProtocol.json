@@ -1,15 +1,31 @@
 [
   {
     "inputs": [
-      { "internalType": "address", "name": "_ccipRouter", "type": "address" },
+      {
+        "internalType": "address",
+        "name": "_ccipRouter",
+        "type": "address"
+      },
       {
         "internalType": "address",
         "name": "_functionsRouter",
         "type": "address"
       },
-      { "internalType": "string", "name": "_sourceCode", "type": "string" },
-      { "internalType": "uint64", "name": "_subscriptionId", "type": "uint64" },
-      { "internalType": "bytes32", "name": "_donId", "type": "bytes32" },
+      {
+        "internalType": "string",
+        "name": "_sourceCode",
+        "type": "string"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_subscriptionId",
+        "type": "uint64"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_donId",
+        "type": "bytes32"
+      },
       {
         "internalType": "address",
         "name": "_automationRegistry",
@@ -31,7 +47,11 @@
         "name": "currentTimestamp",
         "type": "uint256"
       },
-      { "internalType": "uint256", "name": "deadline", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "deadline",
+        "type": "uint256"
+      }
     ],
     "name": "ClaimWindowComplete",
     "type": "error"
@@ -43,66 +63,138 @@
         "name": "currentTimestamp",
         "type": "uint256"
       },
-      { "internalType": "uint256", "name": "deadline", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "deadline",
+        "type": "uint256"
+      }
     ],
     "name": "ClaimWindowInComplete",
     "type": "error"
   },
-  { "inputs": [], "name": "EmptyArgs", "type": "error" },
-  { "inputs": [], "name": "EmptySource", "type": "error" },
+  {
+    "inputs": [],
+    "name": "EmptyArgs",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "EmptySource",
+    "type": "error"
+  },
   {
     "inputs": [
-      { "internalType": "address", "name": "sender", "type": "address" },
-      { "internalType": "address", "name": "token", "type": "address" },
-      { "internalType": "uint256", "name": "amountInWei", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amountInWei",
+        "type": "uint256"
+      }
     ],
     "name": "InsufficientAllowance",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "sender", "type": "address" },
-      { "internalType": "address", "name": "token", "type": "address" },
-      { "internalType": "uint256", "name": "betInUSD", "type": "uint256" },
-      { "internalType": "uint256", "name": "betInWei", "type": "uint256" }
+      {
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "betInUSD",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "betInWei",
+        "type": "uint256"
+      }
     ],
     "name": "InsufficientBetAmount",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "caller", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      }
     ],
     "name": "InvalidAutomationCaller",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "token", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "token",
+        "type": "address"
+      }
     ],
     "name": "InvalidBetToken",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "caller", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "caller",
+        "type": "address"
+      }
     ],
     "name": "InvalidCrosschainCaller",
     "type": "error"
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "router", "type": "address" }
+      {
+        "internalType": "address",
+        "name": "router",
+        "type": "address"
+      }
     ],
     "name": "InvalidRouter",
     "type": "error"
   },
-  { "inputs": [], "name": "NoInlineSecrets", "type": "error" },
-  { "inputs": [], "name": "OnlyRouterCanFulfill", "type": "error" },
-  { "inputs": [], "name": "PanicClaimError", "type": "error" },
+  {
+    "inputs": [],
+    "name": "NoInlineSecrets",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "OnlyRouterCanFulfill",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "PanicClaimError",
+    "type": "error"
+  },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "gameId", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "gameId",
+        "type": "uint256"
+      }
     ],
     "name": "SelectSquadDisabled",
     "type": "error"
@@ -436,11 +528,20 @@
     "name": "RewardsWithdrawn",
     "type": "event"
   },
-  { "stateMutability": "payable", "type": "fallback" },
+  {
+    "stateMutability": "payable",
+    "type": "fallback"
+  },
   {
     "inputs": [],
     "name": "USDC_TOKEN",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -467,7 +568,13 @@
   {
     "inputs": [],
     "name": "betAmount",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -475,18 +582,38 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "bytes32", "name": "messageId", "type": "bytes32" },
+          {
+            "internalType": "bytes32",
+            "name": "messageId",
+            "type": "bytes32"
+          },
           {
             "internalType": "uint64",
             "name": "sourceChainSelector",
             "type": "uint64"
           },
-          { "internalType": "bytes", "name": "sender", "type": "bytes" },
-          { "internalType": "bytes", "name": "data", "type": "bytes" },
+          {
+            "internalType": "bytes",
+            "name": "sender",
+            "type": "bytes"
+          },
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          },
           {
             "components": [
-              { "internalType": "address", "name": "token", "type": "address" },
-              { "internalType": "uint256", "name": "amount", "type": "uint256" }
+              {
+                "internalType": "address",
+                "name": "token",
+                "type": "address"
+              },
+              {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+              }
             ],
             "internalType": "struct Client.EVMTokenAmount[]",
             "name": "destTokenAmounts",
@@ -507,47 +634,95 @@
     "inputs": [
       {
         "components": [
-          { "internalType": "uint256", "name": "index", "type": "uint256" },
-          { "internalType": "uint256", "name": "timestamp", "type": "uint256" },
-          { "internalType": "bytes32", "name": "txHash", "type": "bytes32" },
+          {
+            "internalType": "uint256",
+            "name": "index",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "timestamp",
+            "type": "uint256"
+          },
+          {
+            "internalType": "bytes32",
+            "name": "txHash",
+            "type": "bytes32"
+          },
           {
             "internalType": "uint256",
             "name": "blockNumber",
             "type": "uint256"
           },
-          { "internalType": "bytes32", "name": "blockHash", "type": "bytes32" },
-          { "internalType": "address", "name": "source", "type": "address" },
+          {
+            "internalType": "bytes32",
+            "name": "blockHash",
+            "type": "bytes32"
+          },
+          {
+            "internalType": "address",
+            "name": "source",
+            "type": "address"
+          },
           {
             "internalType": "bytes32[]",
             "name": "topics",
             "type": "bytes32[]"
           },
-          { "internalType": "bytes", "name": "data", "type": "bytes" }
+          {
+            "internalType": "bytes",
+            "name": "data",
+            "type": "bytes"
+          }
         ],
         "internalType": "struct Log",
         "name": "log",
         "type": "tuple"
       },
-      { "internalType": "bytes", "name": "", "type": "bytes" }
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
     ],
     "name": "checkLog",
     "outputs": [
-      { "internalType": "bool", "name": "upkeepNeeded", "type": "bool" },
-      { "internalType": "bytes", "name": "performData", "type": "bytes" }
+      {
+        "internalType": "bool",
+        "name": "upkeepNeeded",
+        "type": "bool"
+      },
+      {
+        "internalType": "bytes",
+        "name": "performData",
+        "type": "bytes"
+      }
     ],
     "stateMutability": "pure",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
       {
         "internalType": "uint256[11]",
         "name": "playerIds",
         "type": "uint256[11]"
       },
-      { "internalType": "uint256", "name": "_totalPoints", "type": "uint256" },
-      { "internalType": "bytes", "name": "proof", "type": "bytes" }
+      {
+        "internalType": "uint256",
+        "name": "_totalPoints",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes",
+        "name": "proof",
+        "type": "bytes"
+      }
     ],
     "name": "claimPoints",
     "outputs": [],
@@ -556,7 +731,11 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      }
     ],
     "name": "claimRewards",
     "outputs": [],
@@ -564,81 +743,179 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "name": "claimmables",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "inputs": [
+      {
+        "internalType": "uint64",
+        "name": "",
+        "type": "uint64"
+      }
+    ],
     "name": "crosschainAddresses",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "donId",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "functionsRouter",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "functionsSubscriptionId",
-    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "outputs": [
+      {
+        "internalType": "uint64",
+        "name": "",
+        "type": "uint64"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "", "type": "uint256" },
-      { "internalType": "address", "name": "", "type": "address" }
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
     ],
     "name": "gameToSquadHash",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint8", "name": "_automation", "type": "uint8" }
+      {
+        "internalType": "uint8",
+        "name": "_automation",
+        "type": "uint8"
+      }
     ],
     "name": "getForwarderAddress",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "getRouter",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "amountInWei", "type": "uint256" },
-      { "internalType": "uint8", "name": "_token", "type": "uint8" }
+      {
+        "internalType": "uint256",
+        "name": "amountInWei",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_token",
+        "type": "uint8"
+      }
     ],
     "name": "getValueInUSD",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "requestId", "type": "bytes32" },
-      { "internalType": "bytes", "name": "response", "type": "bytes" },
-      { "internalType": "bytes", "name": "err", "type": "bytes" }
+      {
+        "internalType": "bytes32",
+        "name": "requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "bytes",
+        "name": "response",
+        "type": "bytes"
+      },
+      {
+        "internalType": "bytes",
+        "name": "err",
+        "type": "bytes"
+      }
     ],
     "name": "handleOracleFulfillment",
     "outputs": [],
@@ -648,28 +925,54 @@
   {
     "inputs": [],
     "name": "latestError",
-    "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "latestRequestId",
-    "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "outputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "latestResponse",
-    "outputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+    "outputs": [
+      {
+        "internalType": "bytes",
+        "name": "",
+        "type": "bytes"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "bytes32", "name": "_squadHash", "type": "bytes32" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_squadHash",
+        "type": "bytes32"
+      }
     ],
     "name": "makeSquadAndPlaceBetETH",
     "outputs": [],
@@ -678,10 +981,26 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "bytes32", "name": "_squadHash", "type": "bytes32" },
-      { "internalType": "uint8", "name": "_token", "type": "uint8" },
-      { "internalType": "uint256", "name": "betAmountInWei", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_squadHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint8",
+        "name": "_token",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint256",
+        "name": "betAmountInWei",
+        "type": "uint256"
+      }
     ],
     "name": "makeSquadAndPlaceBetToken",
     "outputs": [],
@@ -691,20 +1010,36 @@
   {
     "inputs": [],
     "name": "oracleCallbackGasLimit",
-    "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }],
+    "outputs": [
+      {
+        "internalType": "uint32",
+        "name": "",
+        "type": "uint32"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [],
     "name": "owner",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "bytes", "name": "performData", "type": "bytes" }
+      {
+        "internalType": "bytes",
+        "name": "performData",
+        "type": "bytes"
+      }
     ],
     "name": "performUpkeep",
     "outputs": [],
@@ -712,14 +1047,32 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "playerIdRemappings",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "priceFeeds",
     "outputs": [
       {
@@ -732,18 +1085,44 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "",
+        "type": "bytes32"
+      }
+    ],
     "name": "requestToGameId",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "results",
     "outputs": [
-      { "internalType": "string", "name": "ipfsHash", "type": "string" },
-      { "internalType": "bytes32", "name": "merkleRoot", "type": "bytes32" },
+      {
+        "internalType": "string",
+        "name": "ipfsHash",
+        "type": "string"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "merkleRoot",
+        "type": "bytes32"
+      },
       {
         "internalType": "uint256",
         "name": "publishedTimestamp",
@@ -755,7 +1134,11 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
     "name": "setBetAmountInUSDC",
     "outputs": [],
@@ -782,8 +1165,16 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "string", "name": "_remapping", "type": "string" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_remapping",
+        "type": "string"
+      }
     ],
     "name": "setPlayerIdRemmapings",
     "outputs": [],
@@ -806,21 +1197,43 @@
   {
     "inputs": [],
     "name": "sourceCode",
-    "outputs": [{ "internalType": "string", "name": "", "type": "string" }],
+    "outputs": [
+      {
+        "internalType": "string",
+        "name": "",
+        "type": "string"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "bytes4", "name": "interfaceId", "type": "bytes4" }
+      {
+        "internalType": "bytes4",
+        "name": "interfaceId",
+        "type": "bytes4"
+      }
     ],
     "name": "supportsInterface",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "pure",
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "to", "type": "address" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "to",
+        "type": "address"
+      }
+    ],
     "name": "transferOwnership",
     "outputs": [],
     "stateMutability": "nonpayable",
@@ -828,7 +1241,11 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "gameId", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "gameId",
+        "type": "uint256"
+      },
       {
         "internalType": "uint8",
         "name": "donHostedSecretsSlotID",
@@ -846,15 +1263,31 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "name": "upKeepIds",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
   {
     "inputs": [
-      { "internalType": "address[]", "name": "_betTokens", "type": "address[]" }
+      {
+        "internalType": "address[]",
+        "name": "_betTokens",
+        "type": "address[]"
+      }
     ],
     "name": "whitelistBetTokens",
     "outputs": [],
@@ -862,9 +1295,21 @@
     "type": "function"
   },
   {
-    "inputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
     "name": "whitelistedBetTokens",
-    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
     "stateMutability": "view",
     "type": "function"
   },
@@ -877,9 +1322,21 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "address", "name": "_claimer", "type": "address" },
-      { "internalType": "uint256", "name": "_totalPoints", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_claimer",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_totalPoints",
+        "type": "uint256"
+      }
     ],
     "name": "zclaimPointsTest",
     "outputs": [],
@@ -888,9 +1345,21 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "address", "name": "_claimer", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_claimer",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
     "name": "zclaimRewardsTest",
     "outputs": [],
@@ -912,10 +1381,26 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "bytes32", "name": "_squadHash", "type": "bytes32" },
-      { "internalType": "address", "name": "_player", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_squadHash",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "_player",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
     "name": "zmakeSquadTest",
     "outputs": [],
@@ -924,10 +1409,26 @@
   },
   {
     "inputs": [
-      { "internalType": "bytes32", "name": "_requestId", "type": "bytes32" },
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "bytes32", "name": "_merkleRoot", "type": "bytes32" },
-      { "internalType": "string", "name": "_pointsIpfsHash", "type": "string" }
+      {
+        "internalType": "bytes32",
+        "name": "_requestId",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "bytes32",
+        "name": "_merkleRoot",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "string",
+        "name": "_pointsIpfsHash",
+        "type": "string"
+      }
     ],
     "name": "zpostResultsTest",
     "outputs": [],
@@ -936,13 +1437,42 @@
   },
   {
     "inputs": [
-      { "internalType": "address", "name": "_claimer", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
+      {
+        "internalType": "uint256",
+        "name": "_gameId",
+        "type": "uint256"
+      },
+      {
+        "internalType": "string",
+        "name": "_remapping",
+        "type": "string"
+      }
+    ],
+    "name": "zsetPlayerIdRemmapings",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_claimer",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      }
     ],
     "name": "zwithdrawRewardsTest",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
-  { "stateMutability": "payable", "type": "receive" }
+  {
+    "stateMutability": "payable",
+    "type": "receive"
+  }
 ]
