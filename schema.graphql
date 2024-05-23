@@ -49,8 +49,11 @@ type game @entity {
   "the remapping of the player ids"
   playerIdRemapping: String!
 
+  "the time at which the remappings were set"
+  setTime: BigInt!
+
   "start time of the prediction aka. when the remappings were set"
-  predictionsStartTime: BigInt!
+  predictionsStartsIn: BigInt!
 
   "the time when the results are posted on-chain post-game via chainlink"
   resultsPublishedTime: BigInt
@@ -77,6 +80,18 @@ type prediction @entity {
 
   "the gameweek of the prediction"
   game: game!
+
+  "the token/eth used to make the prediction"
+  token: BigInt!
+
+  "the captian of the prediction"
+  captain: BigInt!
+
+  "the vice captain of the prediction"
+  viceCaptain: BigInt!
+
+  "the prediction generated captain and vice captain random or not"
+  usedRandomness: Boolean!
 
   "the claims of user who made the prediction"
   claim: claim @derivedFrom(field: "prediction")

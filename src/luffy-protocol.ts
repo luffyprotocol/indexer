@@ -5,7 +5,6 @@ import {
   CrosschainAddressesSet as CrosschainAddressesSetEvent,
   CrosschainReceived as CrosschainReceivedEvent,
   GamePlayerIdRemappingSet as GamePlayerIdRemappingSetEvent,
-  NewTokensWhitelisted as NewTokensWhitelistedEvent,
   OracleRequestSent as OracleRequestSentEvent,
   OracleResponseFailed as OracleResponseFailedEvent,
   OracleResponseSuccess as OracleResponseSuccessEvent,
@@ -33,7 +32,8 @@ export function handleGamePlayerIdRemappingSet(
   if (game == null) {
     game = new Game(event.params.gameId.toHexString());
     game.playerIdRemapping = event.params.remapping;
-    game.predictionsStartTime = event.block.timestamp;
+    game.setTime = event.block.timestamp;
+    game.predictionsStartsIn = event.params._startsIn;
     game.transactionHash = event.transaction.hash;
     game.save();
   }
@@ -62,13 +62,17 @@ export function handleBetPlaced(event: BetPlacedEvent): void {
         event.params.caller.toHexString()
     );
     user.totalGamesPlayed = user.totalGamesPlayed.plus(BigInt.fromI32(1));
-    user.totalSpent = user.totalSpent.plus(event.params.amount);
+    user.totalSpent = user.totalSpent.plus(event.params.Prediction.amountInWei);
     prediction.game = event.params.gameId.toHexString();
     prediction.user = event.params.caller.toHexString();
   }
-  prediction.squadHash = event.params.squadHash;
+  prediction.squadHash = event.params.Prediction.squadHash;
   prediction.transactionHash = event.transaction.hash;
-  prediction.amount = event.params.amount;
+  prediction.amount = event.params.Prediction.amountInWei;
+  prediction.captain = BigInt.fromI32(event.params.Prediction.captain);
+  prediction.viceCaptain = BigInt.fromI32(event.params.Prediction.viceCaptain);
+  prediction.usedRandomness = event.params.Prediction.isRandom;
+  prediction.token = BigInt.fromI32(event.params.Prediction.token);
   user.save();
   prediction.save();
 }
@@ -154,10 +158,6 @@ export function handleCrosschainAddressesSet(
 
 export function handleCrosschainReceived(
   event: CrosschainReceivedEvent
-): void {}
-
-export function handleNewTokensWhitelisted(
-  event: NewTokensWhitelistedEvent
 ): void {}
 
 export function handleOracleRequestSent(event: OracleRequestSentEvent): void {}
