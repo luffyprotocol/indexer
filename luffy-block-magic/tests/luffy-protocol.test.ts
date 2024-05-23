@@ -6,7 +6,7 @@ import {
   beforeAll,
   afterAll
 } from "matchstick-as/assembly/index"
-import { BigInt, Bytes, Address } from "@graphprotocol/graph-ts"
+import { BigInt, Address, Bytes } from "@graphprotocol/graph-ts"
 import { BetAmountSet } from "../generated/schema"
 import { BetAmountSet as BetAmountSetEvent } from "../generated/LuffyProtocol/LuffyProtocol"
 import { handleBetAmountSet } from "../src/luffy-protocol"

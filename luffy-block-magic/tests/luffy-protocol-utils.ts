@@ -1,12 +1,11 @@
 import { newMockEvent } from "matchstick-as"
-import { ethereum, BigInt, Bytes, Address } from "@graphprotocol/graph-ts"
+import { ethereum, BigInt, Address, Bytes } from "@graphprotocol/graph-ts"
 import {
   BetAmountSet,
   BetPlaced,
   CrosschainAddressesSet,
   CrosschainReceived,
   GamePlayerIdRemappingSet,
-  NewTokensWhitelisted,
   OracleRequestSent,
   OracleResponseFailed,
   OracleResponseSuccess,
@@ -34,9 +33,8 @@ export function createBetAmountSetEvent(amount: BigInt): BetAmountSet {
 
 export function createBetPlacedEvent(
   gameId: BigInt,
-  squadHash: Bytes,
   caller: Address,
-  amount: BigInt
+  Prediction: ethereum.Tuple
 ): BetPlaced {
   let betPlacedEvent = changetype<BetPlaced>(newMockEvent())
 
@@ -46,16 +44,10 @@ export function createBetPlacedEvent(
     new ethereum.EventParam("gameId", ethereum.Value.fromUnsignedBigInt(gameId))
   )
   betPlacedEvent.parameters.push(
-    new ethereum.EventParam(
-      "squadHash",
-      ethereum.Value.fromFixedBytes(squadHash)
-    )
-  )
-  betPlacedEvent.parameters.push(
     new ethereum.EventParam("caller", ethereum.Value.fromAddress(caller))
   )
   betPlacedEvent.parameters.push(
-    new ethereum.EventParam("amount", ethereum.Value.fromUnsignedBigInt(amount))
+    new ethereum.EventParam("Prediction", ethereum.Value.fromTuple(Prediction))
   )
 
   return betPlacedEvent
@@ -106,6 +98,7 @@ export function createCrosschainReceivedEvent(
 
 export function createGamePlayerIdRemappingSetEvent(
   gameId: BigInt,
+  _startsIn: BigInt,
   remapping: string
 ): GamePlayerIdRemappingSet {
   let gamePlayerIdRemappingSetEvent = changetype<GamePlayerIdRemappingSet>(
@@ -118,29 +111,16 @@ export function createGamePlayerIdRemappingSetEvent(
     new ethereum.EventParam("gameId", ethereum.Value.fromUnsignedBigInt(gameId))
   )
   gamePlayerIdRemappingSetEvent.parameters.push(
+    new ethereum.EventParam(
+      "_startsIn",
+      ethereum.Value.fromUnsignedBigInt(_startsIn)
+    )
+  )
+  gamePlayerIdRemappingSetEvent.parameters.push(
     new ethereum.EventParam("remapping", ethereum.Value.fromString(remapping))
   )
 
   return gamePlayerIdRemappingSetEvent
-}
-
-export function createNewTokensWhitelistedEvent(
-  betTokens: Array<Address>
-): NewTokensWhitelisted {
-  let newTokensWhitelistedEvent = changetype<NewTokensWhitelisted>(
-    newMockEvent()
-  )
-
-  newTokensWhitelistedEvent.parameters = new Array()
-
-  newTokensWhitelistedEvent.parameters.push(
-    new ethereum.EventParam(
-      "betTokens",
-      ethereum.Value.fromAddressArray(betTokens)
-    )
-  )
-
-  return newTokensWhitelistedEvent
 }
 
 export function createOracleRequestSentEvent(
@@ -290,6 +270,7 @@ export function createOwnershipTransferredEvent(
 export function createPointsClaimedEvent(
   gameid: BigInt,
   claimer: Address,
+  playerIds: Bytes,
   totalPoints: BigInt
 ): PointsClaimed {
   let pointsClaimedEvent = changetype<PointsClaimed>(newMockEvent())
@@ -301,6 +282,12 @@ export function createPointsClaimedEvent(
   )
   pointsClaimedEvent.parameters.push(
     new ethereum.EventParam("claimer", ethereum.Value.fromAddress(claimer))
+  )
+  pointsClaimedEvent.parameters.push(
+    new ethereum.EventParam(
+      "playerIds",
+      ethereum.Value.fromFixedBytes(playerIds)
+    )
   )
   pointsClaimedEvent.parameters.push(
     new ethereum.EventParam(
@@ -339,7 +326,8 @@ export function createRequestSentEvent(id: Bytes): RequestSent {
 export function createRewardsClaimedEvent(
   gameId: BigInt,
   claimer: Address,
-  value: BigInt
+  value: BigInt,
+  position: BigInt
 ): RewardsClaimed {
   let rewardsClaimedEvent = changetype<RewardsClaimed>(newMockEvent())
 
@@ -353,6 +341,12 @@ export function createRewardsClaimedEvent(
   )
   rewardsClaimedEvent.parameters.push(
     new ethereum.EventParam("value", ethereum.Value.fromUnsignedBigInt(value))
+  )
+  rewardsClaimedEvent.parameters.push(
+    new ethereum.EventParam(
+      "position",
+      ethereum.Value.fromUnsignedBigInt(position)
+    )
   )
 
   return rewardsClaimedEvent
