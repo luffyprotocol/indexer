@@ -8,9 +8,9 @@ dataSources:
     name: LuffyProtocol
     network: fuji
     source:
-      address: "0xcC4203412a962fEFC2e41003bB1Ae296Ff7FE8f3"
+      address: "0x09249908F451EAe8fF4612e3E2C4a0f574a114f4"
       abi: LuffyProtocol
-      startBlock: 33274432
+      startBlock: 33414170
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -44,13 +44,13 @@ dataSources:
           handler: handleCrosschainAddressesSet
         - event: CrosschainReceived(bytes32)
           handler: handleCrosschainReceived
-        - event: GamePlayerIdRemappingSet(uint256,uint256,string)
+        - event: GamePlayerIdRemappingSet(uint256,uint256[],string[],uint256)
           handler: handleGamePlayerIdRemappingSet
         - event: OracleRequestSent(bytes32,uint256)
           handler: handleOracleRequestSent
         - event: OracleResponseFailed(bytes32,bytes)
           handler: handleOracleResponseFailed
-        - event: OracleResponseSuccess(bytes32,bytes)
+        - event: OracleResponseSuccess(bytes32,bytes,bool)
           handler: handleOracleResponseSuccess
         - event: OracleResultsPublished(bytes32,uint256,bytes32,string)
           handler: handleOracleResultsPublished
@@ -58,7 +58,7 @@ dataSources:
           handler: handleOwnershipTransferRequested
         - event: OwnershipTransferred(indexed address,indexed address)
           handler: handleOwnershipTransferred
-        - event: PointsClaimed(uint256,address,bytes32,uint256)
+        - event: PointsClaimed(uint256,address,bytes32[11],uint256)
           handler: handlePointsClaimed
         - event: RequestFulfilled(indexed bytes32)
           handler: handleRequestFulfilled

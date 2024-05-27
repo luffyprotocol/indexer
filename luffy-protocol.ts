@@ -16,14 +16,14 @@ import {
   RequestSent as RequestSentEvent,
   RewardsClaimed as RewardsClaimedEvent,
   RewardsWithdrawn as RewardsWithdrawnEvent,
-} from "../generated/LuffyProtocol/LuffyProtocol";
+} from "./generated/LuffyProtocol/LuffyProtocol";
 import {
   game as Game,
   prediction as Prediction,
   user as User,
   claim as Claim,
   reward as Reward,
-} from "../generated/schema";
+} from "./generated/schema";
 
 export function handleGamePlayerIdRemappingSet(
   event: GamePlayerIdRemappingSetEvent

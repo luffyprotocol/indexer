@@ -97,9 +97,10 @@ export function createCrosschainReceivedEvent(
 }
 
 export function createGamePlayerIdRemappingSetEvent(
-  gameId: BigInt,
-  _startsIn: BigInt,
-  remapping: string
+  gameweek: BigInt,
+  gameIds: Array<BigInt>,
+  remappings: Array<string>,
+  resultsTriggersIn: BigInt
 ): GamePlayerIdRemappingSet {
   let gamePlayerIdRemappingSetEvent = changetype<GamePlayerIdRemappingSet>(
     newMockEvent()
@@ -108,16 +109,28 @@ export function createGamePlayerIdRemappingSetEvent(
   gamePlayerIdRemappingSetEvent.parameters = new Array()
 
   gamePlayerIdRemappingSetEvent.parameters.push(
-    new ethereum.EventParam("gameId", ethereum.Value.fromUnsignedBigInt(gameId))
-  )
-  gamePlayerIdRemappingSetEvent.parameters.push(
     new ethereum.EventParam(
-      "_startsIn",
-      ethereum.Value.fromUnsignedBigInt(_startsIn)
+      "gameweek",
+      ethereum.Value.fromUnsignedBigInt(gameweek)
     )
   )
   gamePlayerIdRemappingSetEvent.parameters.push(
-    new ethereum.EventParam("remapping", ethereum.Value.fromString(remapping))
+    new ethereum.EventParam(
+      "gameIds",
+      ethereum.Value.fromUnsignedBigIntArray(gameIds)
+    )
+  )
+  gamePlayerIdRemappingSetEvent.parameters.push(
+    new ethereum.EventParam(
+      "remappings",
+      ethereum.Value.fromStringArray(remappings)
+    )
+  )
+  gamePlayerIdRemappingSetEvent.parameters.push(
+    new ethereum.EventParam(
+      "resultsTriggersIn",
+      ethereum.Value.fromUnsignedBigInt(resultsTriggersIn)
+    )
   )
 
   return gamePlayerIdRemappingSetEvent
@@ -169,7 +182,8 @@ export function createOracleResponseFailedEvent(
 
 export function createOracleResponseSuccessEvent(
   requestId: Bytes,
-  response: Bytes
+  response: Bytes,
+  isFunction: boolean
 ): OracleResponseSuccess {
   let oracleResponseSuccessEvent = changetype<OracleResponseSuccess>(
     newMockEvent()
@@ -185,6 +199,12 @@ export function createOracleResponseSuccessEvent(
   )
   oracleResponseSuccessEvent.parameters.push(
     new ethereum.EventParam("response", ethereum.Value.fromBytes(response))
+  )
+  oracleResponseSuccessEvent.parameters.push(
+    new ethereum.EventParam(
+      "isFunction",
+      ethereum.Value.fromBoolean(isFunction)
+    )
   )
 
   return oracleResponseSuccessEvent
@@ -270,7 +290,7 @@ export function createOwnershipTransferredEvent(
 export function createPointsClaimedEvent(
   gameid: BigInt,
   claimer: Address,
-  playerIds: Bytes,
+  playerIds: Array<Bytes>,
   totalPoints: BigInt
 ): PointsClaimed {
   let pointsClaimedEvent = changetype<PointsClaimed>(newMockEvent())
@@ -286,7 +306,7 @@ export function createPointsClaimedEvent(
   pointsClaimedEvent.parameters.push(
     new ethereum.EventParam(
       "playerIds",
-      ethereum.Value.fromFixedBytes(playerIds)
+      ethereum.Value.fromFixedBytesArray(playerIds)
     )
   )
   pointsClaimedEvent.parameters.push(

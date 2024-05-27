@@ -17,6 +17,11 @@
           { "internalType": "address", "name": "usdcToken", "type": "address" },
           { "internalType": "address", "name": "linkToken", "type": "address" },
           {
+            "internalType": "uint256[2]",
+            "name": "upKeepIds",
+            "type": "uint256[2]"
+          },
+          {
             "internalType": "contract AggregatorV3Interface[2]",
             "name": "priceFeeds",
             "type": "address[2]"
@@ -55,6 +60,7 @@
     "type": "error"
   },
   { "inputs": [], "name": "EmptyArgs", "type": "error" },
+  { "inputs": [], "name": "EmptySecrets", "type": "error" },
   { "inputs": [], "name": "EmptySource", "type": "error" },
   {
     "inputs": [
@@ -207,20 +213,26 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "gameId",
+        "name": "gameweek",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256[]",
+        "name": "gameIds",
+        "type": "uint256[]"
+      },
+      {
+        "indexed": false,
+        "internalType": "string[]",
+        "name": "remappings",
+        "type": "string[]"
       },
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "_startsIn",
+        "name": "resultsTriggersIn",
         "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "string",
-        "name": "remapping",
-        "type": "string"
       }
     ],
     "name": "GamePlayerIdRemappingSet",
@@ -278,6 +290,12 @@
         "internalType": "bytes",
         "name": "response",
         "type": "bytes"
+      },
+      {
+        "indexed": false,
+        "internalType": "bool",
+        "name": "isFunction",
+        "type": "bool"
       }
     ],
     "name": "OracleResponseSuccess",
@@ -369,9 +387,9 @@
       },
       {
         "indexed": false,
-        "internalType": "bytes32",
+        "internalType": "bytes32[11]",
         "name": "playerIds",
-        "type": "bytes32"
+        "type": "bytes32[11]"
       },
       {
         "indexed": false,
@@ -489,13 +507,6 @@
   },
   {
     "inputs": [],
-    "name": "FUNCTIONS_ROUTER",
-    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "LINK_TOKEN",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
@@ -538,6 +549,20 @@
         "type": "address"
       }
     ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes", "name": "_proof", "type": "bytes" },
+      {
+        "internalType": "bytes32[]",
+        "name": "_publicInputs",
+        "type": "bytes32[]"
+      }
+    ],
+    "name": "_verifyProof",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
     "stateMutability": "view",
     "type": "function"
   },
@@ -629,6 +654,16 @@
     "type": "function"
   },
   {
+    "inputs": [{ "internalType": "bytes", "name": "", "type": "bytes" }],
+    "name": "checkUpkeep",
+    "outputs": [
+      { "internalType": "bool", "name": "upkeepNeeded", "type": "bool" },
+      { "internalType": "bytes", "name": "performData", "type": "bytes" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
       { "internalType": "address", "name": "_player", "type": "address" },
@@ -643,7 +678,11 @@
   {
     "inputs": [
       { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "bytes32", "name": "_playerIds", "type": "bytes32" },
+      {
+        "internalType": "bytes32[11]",
+        "name": "_playerIds",
+        "type": "bytes32[11]"
+      },
       { "internalType": "uint256", "name": "_totalPoints", "type": "uint256" },
       { "internalType": "bytes", "name": "_proof", "type": "bytes" }
     ],
@@ -679,6 +718,13 @@
     "type": "function"
   },
   {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "gameIdsToRemappingsSet",
+    "outputs": [{ "internalType": "bool", "name": "", "type": "bool" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       { "internalType": "uint256", "name": "", "type": "uint256" },
       { "internalType": "address", "name": "", "type": "address" }
@@ -699,10 +745,12 @@
     "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "name": "games",
     "outputs": [
-      { "internalType": "uint256", "name": "gameId", "type": "uint256" },
-      { "internalType": "string", "name": "remapping", "type": "string" },
-      { "internalType": "uint256", "name": "startsIn", "type": "uint256" },
-      { "internalType": "bool", "name": "exists", "type": "bool" }
+      { "internalType": "uint256", "name": "gameweek", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "resultsTriggersIn",
+        "type": "uint256"
+      }
     ],
     "stateMutability": "view",
     "type": "function"
@@ -795,6 +843,13 @@
   },
   {
     "inputs": [],
+    "name": "latestGameweek",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "latestRequestId",
     "outputs": [{ "internalType": "bytes32", "name": "", "type": "bytes32" }],
     "stateMutability": "view",
@@ -842,13 +897,6 @@
   },
   {
     "inputs": [],
-    "name": "oracleCallbackGasLimit",
-    "outputs": [{ "internalType": "uint32", "name": "", "type": "uint32" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
     "name": "owner",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
@@ -861,6 +909,20 @@
     "name": "performUpkeep",
     "outputs": [],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "prevDonHostedSecretsSlotID",
+    "outputs": [{ "internalType": "uint8", "name": "", "type": "uint8" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "prevDonHostedSecretsVersion",
+    "outputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -968,6 +1030,24 @@
   },
   {
     "inputs": [
+      {
+        "internalType": "uint8",
+        "name": "_donHostedSecretsSlotID",
+        "type": "uint8"
+      },
+      {
+        "internalType": "uint64",
+        "name": "_donHostedSecretsVersion",
+        "type": "uint64"
+      }
+    ],
+    "name": "setDonHostedSecrets",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint256", "name": "_upKeepId", "type": "uint256" }
     ],
     "name": "setLogTriggerAutomation",
@@ -986,11 +1066,16 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "uint256", "name": "_startsIn", "type": "uint256" },
-      { "internalType": "string", "name": "_remapping", "type": "string" }
+      { "internalType": "uint256", "name": "gameweek", "type": "uint256" },
+      { "internalType": "uint256[]", "name": "gameIds", "type": "uint256[]" },
+      { "internalType": "string[]", "name": "remappings", "type": "string[]" },
+      {
+        "internalType": "uint256",
+        "name": "resultsTriggersIn",
+        "type": "uint256"
+      }
     ],
-    "name": "setPlayerIdRemmapings",
+    "name": "setPlayerIdRemappings",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1043,18 +1128,12 @@
   {
     "inputs": [
       { "internalType": "uint256", "name": "gameId", "type": "uint256" },
-      {
-        "internalType": "uint8",
-        "name": "donHostedSecretsSlotID",
-        "type": "uint8"
-      },
-      {
-        "internalType": "uint64",
-        "name": "donHostedSecretsVersion",
-        "type": "uint64"
-      }
+      { "internalType": "string", "name": "remapping", "type": "string" },
+      { "internalType": "uint8", "name": "slotId", "type": "uint8" },
+      { "internalType": "uint64", "name": "version", "type": "uint64" },
+      { "internalType": "bytes[]", "name": "bytesArgs", "type": "bytes[]" }
     ],
-    "name": "triggerFetchResults",
+    "name": "triggerFetchResult",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1104,7 +1183,11 @@
     "inputs": [
       { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
       { "internalType": "address", "name": "_claimer", "type": "address" },
-      { "internalType": "bytes32", "name": "_playerIds", "type": "bytes32" },
+      {
+        "internalType": "bytes32[11]",
+        "name": "_playerIds",
+        "type": "bytes32[11]"
+      },
       { "internalType": "uint256", "name": "_totalPoints", "type": "uint256" }
     ],
     "name": "zclaimPointsTest",
@@ -1178,9 +1261,14 @@
   },
   {
     "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "uint256", "name": "_startsIn", "type": "uint256" },
-      { "internalType": "string", "name": "_remapping", "type": "string" }
+      { "internalType": "uint256", "name": "gameweek", "type": "uint256" },
+      { "internalType": "uint256[]", "name": "gameIds", "type": "uint256[]" },
+      { "internalType": "string[]", "name": "remappings", "type": "string[]" },
+      {
+        "internalType": "uint256",
+        "name": "resultsTriggersIn",
+        "type": "uint256"
+      }
     ],
     "name": "zsetPlayerIdRemmapings",
     "outputs": [],
