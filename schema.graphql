@@ -55,6 +55,9 @@ type game @entity {
   "start time of the prediction aka. when the remappings were set"
   predictionsStartsIn: BigInt!
 
+  "time at which the results are triggered via chainlink"
+  resultsTriggeredIn: BigInt!
+
   "the time when the results are posted on-chain post-game via chainlink"
   resultsPublishedTime: BigInt
 

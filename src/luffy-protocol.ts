@@ -17,252 +17,171 @@ import {
   RewardsClaimed as RewardsClaimedEvent,
   RewardsWithdrawn as RewardsWithdrawnEvent,
 } from "../generated/LuffyProtocol/LuffyProtocol";
+import {
+  game as Game,
+  prediction as Prediction,
+  user as User,
+  claim as Claim,
+  reward as Reward,
+} from "../generated/schema";
 
-export function handleBetAmountSet(event: BetAmountSetEvent): void {
-  let entity = new BetAmountSet(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.amount = event.params.amount;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
+export function handleBetAmountSet(event: BetAmountSetEvent): void {}
 
 export function handleBetPlaced(event: BetPlacedEvent): void {
-  let entity = new BetPlaced(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+  let user = User.load(event.params.caller.toHexString());
+  if (user == null) {
+    user = new User(event.params.caller.toHexString().toLowerCase());
+    user.address = event.params.caller;
+    user.totalGamesClaimed = BigInt.fromI32(0);
+    user.totalPointsWon = BigInt.fromI32(0);
+    user.totalSpent = BigInt.fromI32(0);
+    user.totalGamesPlayed = BigInt.fromI32(0);
+    user.totalClaimmables = BigInt.fromI32(0);
+    user.totalEarnings = BigInt.fromI32(0);
+  }
+
+  let prediction = Prediction.load(
+    event.params.gameId.toHexString() + "-" + event.params.caller.toHexString()
   );
-  entity.gameId = event.params.gameId;
-  entity.caller = event.params.caller;
-  entity.Prediction_squadHash = event.params.Prediction.squadHash;
-  entity.Prediction_amountInWei = event.params.Prediction.amountInWei;
-  entity.Prediction_token = event.params.Prediction.token;
-  entity.Prediction_captain = event.params.Prediction.captain;
-  entity.Prediction_viceCaptain = event.params.Prediction.viceCaptain;
-  entity.Prediction_isRandom = event.params.Prediction.isRandom;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleCrosschainAddressesSet(
-  event: CrosschainAddressesSetEvent
-): void {
-  let entity = new CrosschainAddressesSet(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.destinationSelectors = event.params.destinationSelectors;
-  entity.destinationAddresses = event.params.destinationAddresses;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleCrosschainReceived(event: CrosschainReceivedEvent): void {
-  let entity = new CrosschainReceived(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.messageId = event.params.messageId;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  if (prediction == null) {
+    prediction = new Prediction(
+      event.params.gameId.toHexString() +
+        "-" +
+        event.params.caller.toHexString()
+    );
+    user.totalGamesPlayed = user.totalGamesPlayed.plus(BigInt.fromI32(1));
+    user.totalSpent = user.totalSpent.plus(event.params.Prediction.amountInWei);
+    prediction.game = event.params.gameId.toHexString();
+    prediction.user = event.params.caller.toHexString();
+  }
+  prediction.squadHash = event.params.Prediction.squadHash;
+  prediction.transactionHash = event.transaction.hash;
+  prediction.amount = event.params.Prediction.amountInWei;
+  prediction.captain = BigInt.fromI32(event.params.Prediction.captain);
+  prediction.viceCaptain = BigInt.fromI32(event.params.Prediction.viceCaptain);
+  prediction.usedRandomness = event.params.Prediction.isRandom;
+  prediction.token = BigInt.fromI32(event.params.Prediction.token);
+  user.save();
+  prediction.save();
 }
 
 export function handleGamePlayerIdRemappingSet(
   event: GamePlayerIdRemappingSetEvent
 ): void {
-  let entity = new GamePlayerIdRemappingSet(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.gameweek = event.params.gameweek;
-  entity.gameIds = event.params.gameIds;
-  entity.remappings = event.params.remappings;
-  entity.resultsTriggersIn = event.params.resultsTriggersIn;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleOracleRequestSent(event: OracleRequestSentEvent): void {
-  let entity = new OracleRequestSent(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.requestId = event.params.requestId;
-  entity.gameId = event.params.gameId;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleOracleResponseFailed(
-  event: OracleResponseFailedEvent
-): void {
-  let entity = new OracleResponseFailed(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.requestId = event.params.requestId;
-  entity.err = event.params.err;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleOracleResponseSuccess(
-  event: OracleResponseSuccessEvent
-): void {
-  let entity = new OracleResponseSuccess(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.requestId = event.params.requestId;
-  entity.response = event.params.response;
-  entity.isFunction = event.params.isFunction;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  for (let i = 0; i < event.params.gameIds.length; i++) {
+    let game = Game.load(event.params.gameIds[i].toHexString());
+    if (game == null) {
+      game = new Game(event.params.gameIds[i].toHexString());
+      game.playerIdRemapping = event.params.remappings[i];
+      game.setTime = event.block.timestamp;
+      game.predictionsStartsIn = event.block.timestamp;
+      game.resultsTriggeredIn = event.block.timestamp.plus(
+        event.params.resultsTriggersIn
+      );
+      game.transactionHash = event.transaction.hash;
+      game.save();
+    }
+  }
 }
 
 export function handleOracleResultsPublished(
   event: OracleResultsPublishedEvent
 ): void {
-  let entity = new OracleResultsPublished(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.requestId = event.params.requestId;
-  entity.gameId = event.params.gameId;
-  entity.pointsMerkleRoot = event.params.pointsMerkleRoot;
-  entity.pointsIpfsHash = event.params.pointsIpfsHash;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleOwnershipTransferRequested(
-  event: OwnershipTransferRequestedEvent
-): void {
-  let entity = new OwnershipTransferRequested(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.from = event.params.from;
-  entity.to = event.params.to;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleOwnershipTransferred(
-  event: OwnershipTransferredEvent
-): void {
-  let entity = new OwnershipTransferred(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.from = event.params.from;
-  entity.to = event.params.to;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  let game = Game.load(event.params.gameId.toHexString());
+  if (game != null) {
+    game.resultsPublishedTime = event.block.timestamp;
+    game.pointsMerkleRoot = event.params.pointsMerkleRoot;
+    game.gameResults = event.params.pointsIpfsHash;
+    game.save();
+  }
 }
 
 export function handlePointsClaimed(event: PointsClaimedEvent): void {
-  let entity = new PointsClaimed(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+  let user = User.load(event.params.claimer.toHexString());
+
+  let claim = Claim.load(
+    event.params.gameid.toHexString() + "-" + event.params.claimer.toHexString()
   );
-  entity.gameid = event.params.gameid;
-  entity.claimer = event.params.claimer;
-  entity.playerIds = event.params.playerIds;
-  entity.totalPoints = event.params.totalPoints;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleRequestFulfilled(event: RequestFulfilledEvent): void {
-  let entity = new RequestFulfilled(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.LuffyProtocol_id = event.params.id;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
-}
-
-export function handleRequestSent(event: RequestSentEvent): void {
-  let entity = new RequestSent(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.LuffyProtocol_id = event.params.id;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  if (claim == null) {
+    claim = new Claim(
+      event.params.gameid.toHexString() +
+        "-" +
+        event.params.claimer.toHexString()
+    );
+    claim.game = event.params.gameid.toHexString();
+    claim.user = event.params.claimer.toHexString();
+    claim.prediction = claim.id;
+    claim.points = event.params.totalPoints;
+    claim.transactionHash = event.transaction.hash;
+    if (user != null) {
+      user.totalGamesClaimed = user.totalGamesClaimed.plus(BigInt.fromI32(1));
+      user.totalPointsWon = user.totalPointsWon.plus(event.params.totalPoints);
+      user.save();
+    }
+    claim.save();
+  }
 }
 
 export function handleRewardsClaimed(event: RewardsClaimedEvent): void {
-  let entity = new RewardsClaimed(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
+  let user = User.load(event.params.claimer.toHexString());
+  let reward = Reward.load(
+    event.params.gameId.toHexString() + "-" + event.params.claimer.toHexString()
   );
-  entity.gameId = event.params.gameId;
-  entity.claimer = event.params.claimer;
-  entity.value = event.params.value;
-  entity.position = event.params.position;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  if (reward == null) {
+    reward = new Reward(
+      event.params.gameId.toHexString() +
+        "-" +
+        event.params.claimer.toHexString()
+    );
+    reward.game = event.params.gameId.toHexString();
+    reward.user = event.params.claimer.toHexString();
+    reward.claim = reward.id;
+    reward.prediction = reward.id;
+    reward.amount = event.params.value;
+    reward.position = BigInt.fromI32(69);
+    reward.transactionHash = event.transaction.hash;
+    if (user != null) {
+      user.totalClaimmables = user.totalClaimmables.plus(event.params.value);
+      user.totalEarnings = user.totalEarnings.plus(event.params.value);
+      user.save();
+    }
+    reward.save();
+  }
 }
 
 export function handleRewardsWithdrawn(event: RewardsWithdrawnEvent): void {
-  let entity = new RewardsWithdrawn(
-    event.transaction.hash.concatI32(event.logIndex.toI32())
-  );
-  entity.claimer = event.params.claimer;
-  entity.value = event.params.value;
-
-  entity.blockNumber = event.block.number;
-  entity.blockTimestamp = event.block.timestamp;
-  entity.transactionHash = event.transaction.hash;
-
-  entity.save();
+  let user = User.load(event.params.claimer.toHexString());
+  if (user != null) {
+    user.totalClaimmables = BigInt.fromI32(0);
+    user.save();
+  }
 }
+
+export function handleRequestFulfilled(event: RequestFulfilledEvent): void {}
+
+export function handleRequestSent(event: RequestSentEvent): void {}
+
+export function handleOwnershipTransferRequested(
+  event: OwnershipTransferRequestedEvent
+): void {}
+
+export function handleOwnershipTransferred(
+  event: OwnershipTransferredEvent
+): void {}
+export function handleOracleRequestSent(event: OracleRequestSentEvent): void {}
+
+export function handleOracleResponseFailed(
+  event: OracleResponseFailedEvent
+): void {}
+
+export function handleOracleResponseSuccess(
+  event: OracleResponseSuccessEvent
+): void {}
+
+export function handleCrosschainAddressesSet(
+  event: CrosschainAddressesSetEvent
+): void {}
+
+export function handleCrosschainReceived(
+  event: CrosschainReceivedEvent
+): void {}
