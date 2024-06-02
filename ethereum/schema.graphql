@@ -1,0 +1,65 @@
+type BetAmountSet @entity(immutable: true) {
+  id: Bytes!
+  amount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BetPlaced @entity(immutable: true) {
+  id: Bytes!
+  gameId: BigInt! # uint256
+  caller: Bytes! # address
+  Prediction_squadHash: Bytes! # bytes32
+  Prediction_amountInWei: BigInt! # uint256
+  Prediction_token: Int! # uint8
+  Prediction_captain: Int! # uint8
+  Prediction_viceCaptain: Int! # uint8
+  Prediction_isRandom: Boolean! # bool
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CrosschainAddressesSet @entity(immutable: true) {
+  id: Bytes!
+  destinationSelectors: [BigInt!]! # uint64[]
+  destinationAddresses: [Bytes!]! # address[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CrosschainMessageSent @entity(immutable: true) {
+  id: Bytes!
+  messageId: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type CrosschainReceived @entity(immutable: true) {
+  id: Bytes!
+  messageId: Bytes! # bytes32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferRequested @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  from: Bytes! # address
+  to: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}

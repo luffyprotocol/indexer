@@ -1,0 +1,44 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LuffyCrosschain
+    network: sepolia
+    source:
+      address: "0xCBe49DBE7bf83f8238b4Ae89c1c67Af17b48D526"
+      abi: LuffyCrosschain
+      startBlock: 6023516
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BetAmountSet
+        - BetPlaced
+        - CrosschainAddressesSet
+        - CrosschainMessageSent
+        - CrosschainReceived
+        - OwnershipTransferRequested
+        - OwnershipTransferred
+      abis:
+        - name: LuffyCrosschain
+          file: ./abis/LuffyCrosschain.json
+      eventHandlers:
+        - event: BetAmountSet(uint256)
+          handler: handleBetAmountSet
+        - event: BetPlaced(uint256,address,(bytes32,uint256,uint8,uint8,uint8,bool))
+          handler: handleBetPlaced
+        - event: CrosschainAddressesSet(uint64[],address[])
+          handler: handleCrosschainAddressesSet
+        - event: CrosschainMessageSent(bytes32)
+          handler: handleCrosschainMessageSent
+        - event: CrosschainReceived(bytes32)
+          handler: handleCrosschainReceived
+        - event: OwnershipTransferRequested(indexed address,indexed address)
+          handler: handleOwnershipTransferRequested
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/luffy-crosschain.ts

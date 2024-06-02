@@ -1,0 +1,8 @@
+{
+  "sepolia": {
+    "LuffyCrosschain": {
+      "address": "0xCBe49DBE7bf83f8238b4Ae89c1c67Af17b48D526",
+      "startBlock": 6023516
+    }
+  }
+}
