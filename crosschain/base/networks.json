@@ -1,0 +1,8 @@
+{
+  "base-sepolia": {
+    "LuffyCrosschainNoVRF": {
+      "address": "0xB096d51062F906c4f72d394fe522C845c377370D",
+      "startBlock": 10771386
+    }
+  }
+}
