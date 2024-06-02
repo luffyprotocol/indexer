@@ -75,7 +75,11 @@
     "inputs": [
       { "internalType": "address", "name": "sender", "type": "address" },
       { "internalType": "uint8", "name": "token", "type": "uint8" },
-      { "internalType": "uint256", "name": "betInUSD", "type": "uint256" },
+      {
+        "internalType": "uint256",
+        "name": "requiredBetInWei",
+        "type": "uint256"
+      },
       { "internalType": "uint256", "name": "betInWei", "type": "uint256" }
     ],
     "name": "InsufficientBetAmount",
@@ -711,6 +715,13 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "clearCacheFunds",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
     "inputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
     "name": "crosschainAddresses",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
@@ -764,6 +775,16 @@
   },
   {
     "inputs": [
+      { "internalType": "uint256", "name": "amountInUSD", "type": "uint256" },
+      { "internalType": "uint8", "name": "_token", "type": "uint8" }
+    ],
+    "name": "getBetValue",
+    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
       { "internalType": "uint8", "name": "_automation", "type": "uint8" }
     ],
     "name": "getForwarderAddress",
@@ -797,16 +818,6 @@
     "inputs": [],
     "name": "getRouter",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "amountInWei", "type": "uint256" },
-      { "internalType": "uint8", "name": "_token", "type": "uint8" }
-    ],
-    "name": "getValueInUSD",
-    "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
     "stateMutability": "view",
     "type": "function"
   },
