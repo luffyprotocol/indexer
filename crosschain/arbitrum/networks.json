@@ -1,0 +1,8 @@
+{
+  "arbitrum-sepolia": {
+    "LuffyCrosschain": {
+      "address": "0xE54b2A824E59890183E9a6e50911aDee6A587a7B",
+      "startBlock": 50393995
+    }
+  }
+}

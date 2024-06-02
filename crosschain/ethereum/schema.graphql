@@ -1,0 +1,19 @@
+type prediction @entity {
+  "the id of the prediction"
+  id: ID!
+
+  "the profile of the user"
+  user: Bytes!
+
+  "the gameId of the prediction"
+  game: BigInt!
+
+  "the captian of the prediction"
+  captain: BigInt!
+
+  "the vice captain of the prediction"
+  viceCaptain: BigInt!
+
+  "the transaction hash in which the prediction was created"
+  transactionHash: Bytes!
+}
