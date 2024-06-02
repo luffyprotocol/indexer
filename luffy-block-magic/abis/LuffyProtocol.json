@@ -17,11 +17,6 @@
           { "internalType": "address", "name": "usdcToken", "type": "address" },
           { "internalType": "address", "name": "linkToken", "type": "address" },
           {
-            "internalType": "uint256[2]",
-            "name": "upKeepIds",
-            "type": "uint256[2]"
-          },
-          {
             "internalType": "contract AggregatorV3Interface[2]",
             "name": "priceFeeds",
             "type": "address[2]"
@@ -34,18 +29,6 @@
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "currentTimestamp",
-        "type": "uint256"
-      },
-      { "internalType": "uint256", "name": "deadline", "type": "uint256" }
-    ],
-    "name": "ClaimWindowComplete",
-    "type": "error"
   },
   {
     "inputs": [
@@ -578,19 +561,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "automationRegistry",
-    "outputs": [
-      {
-        "internalType": "contract IKeeperRegistryMaster",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "components": [
@@ -724,6 +694,13 @@
   {
     "inputs": [{ "internalType": "uint64", "name": "", "type": "uint64" }],
     "name": "crosschainAddresses",
+    "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+    "name": "forwarderAddresses",
     "outputs": [{ "internalType": "address", "name": "", "type": "address" }],
     "stateMutability": "view",
     "type": "function"
@@ -1041,18 +1018,10 @@
   },
   {
     "inputs": [
-      {
-        "internalType": "uint8",
-        "name": "_donHostedSecretsSlotID",
-        "type": "uint8"
-      },
-      {
-        "internalType": "uint64",
-        "name": "_donHostedSecretsVersion",
-        "type": "uint64"
-      }
+      { "internalType": "uint8", "name": "_automation", "type": "uint8" },
+      { "internalType": "address", "name": "_forwarder", "type": "address" }
     ],
-    "name": "setDonHostedSecrets",
+    "name": "setForwarderAddress",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1191,34 +1160,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "address", "name": "_claimer", "type": "address" },
-      {
-        "internalType": "bytes32[11]",
-        "name": "_playerIds",
-        "type": "bytes32[11]"
-      },
-      { "internalType": "uint256", "name": "_totalPoints", "type": "uint256" }
-    ],
-    "name": "zclaimPointsTest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "address", "name": "_claimer", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" },
-      { "internalType": "uint256", "name": "_position", "type": "uint256" }
-    ],
-    "name": "zclaimRewardsTest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "zkVerifier",
     "outputs": [
@@ -1229,71 +1170,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "address", "name": "_player", "type": "address" },
-      {
-        "components": [
-          { "internalType": "bytes32", "name": "squadHash", "type": "bytes32" },
-          {
-            "internalType": "uint256",
-            "name": "amountInWei",
-            "type": "uint256"
-          },
-          { "internalType": "uint8", "name": "token", "type": "uint8" },
-          { "internalType": "uint8", "name": "captain", "type": "uint8" },
-          { "internalType": "uint8", "name": "viceCaptain", "type": "uint8" },
-          { "internalType": "bool", "name": "isRandom", "type": "bool" }
-        ],
-        "internalType": "struct Predictions.Prediction",
-        "name": "_prediction",
-        "type": "tuple"
-      }
-    ],
-    "name": "zmakeSquadTest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "bytes32", "name": "_requestId", "type": "bytes32" },
-      { "internalType": "uint256", "name": "_gameId", "type": "uint256" },
-      { "internalType": "bytes32", "name": "_merkleRoot", "type": "bytes32" },
-      { "internalType": "string", "name": "_pointsIpfsHash", "type": "string" }
-    ],
-    "name": "zpostResultsTest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "uint256", "name": "gameweek", "type": "uint256" },
-      { "internalType": "uint256[]", "name": "gameIds", "type": "uint256[]" },
-      { "internalType": "string[]", "name": "remappings", "type": "string[]" },
-      {
-        "internalType": "uint256",
-        "name": "resultsTriggersIn",
-        "type": "uint256"
-      }
-    ],
-    "name": "zsetPlayerIdRemmapings",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      { "internalType": "address", "name": "_claimer", "type": "address" },
-      { "internalType": "uint256", "name": "_amount", "type": "uint256" }
-    ],
-    "name": "zwithdrawRewardsTest",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   { "stateMutability": "payable", "type": "receive" }
