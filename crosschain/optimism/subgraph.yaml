@@ -1,0 +1,44 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LuffyCrosschainNoVRF
+    network: optimism-sepolia
+    source:
+      address: "0x0C29b8C5121a4a72E9D623eFe418875fc7E3Dd15"
+      abi: LuffyCrosschainNoVRF
+      startBlock: 12764767
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - BetAmountSet
+        - BetPlaced
+        - CrosschainAddressesSet
+        - CrosschainMessageSent
+        - CrosschainReceived
+        - OwnershipTransferRequested
+        - OwnershipTransferred
+      abis:
+        - name: LuffyCrosschainNoVRF
+          file: ./abis/LuffyCrosschainNoVRF.json
+      eventHandlers:
+        - event: BetAmountSet(uint256)
+          handler: handleBetAmountSet
+        - event: BetPlaced(uint256,address,(bytes32,uint256,uint8,uint8,uint8,bool))
+          handler: handleBetPlaced
+        - event: CrosschainAddressesSet(uint64[],address[])
+          handler: handleCrosschainAddressesSet
+        - event: CrosschainMessageSent(bytes32)
+          handler: handleCrosschainMessageSent
+        - event: CrosschainReceived(bytes32)
+          handler: handleCrosschainReceived
+        - event: OwnershipTransferRequested(indexed address,indexed address)
+          handler: handleOwnershipTransferRequested
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/luffy-crosschain-no-vrf.ts
