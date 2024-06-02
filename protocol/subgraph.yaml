@@ -8,9 +8,9 @@ dataSources:
     name: LuffyProtocol
     network: fuji
     source:
-      address: "0xf97d85DF6c4D2b032645EE2C2D24423Ed66793f4"
+      address: "0xc8BcE37c917571237aeC37f957E9E80f56122221"
       abi: LuffyProtocol
-      startBlock: 33669214
+      startBlock: 33677600
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
